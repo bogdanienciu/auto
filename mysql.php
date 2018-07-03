@@ -24,4 +24,3 @@
 	}
 
 	// dump($car->getSpecificationCategories());
-	

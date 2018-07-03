@@ -1,7 +1,8 @@
 <?php
+require_once('vendor/autoload.php');
+require_once('models/MySQLConnection.php');
 
 /**
- * 
  */
 class MySQLReader
 {
@@ -11,19 +12,10 @@ class MySQLReader
 
 	public function __construct($id)
 	{
+		 $this->id = $id;
 
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "auto";
-
-		$this->id = $id;
-		$this->connection = new mysqli($servername, $username, $password, $dbname);
-
-		// Check connection
-		if ($this->connection->connect_error) {
-		    die("Connection failed: " . $this->connection->connect_error);
-		}
+		$mysql = new MySQLConnection();
+		$this->connection = $mysql->getConnection();
 
 		$sql = "SELECT * FROM cars where id = '" . $this->id . "'";
 		$result = $this->connection->query($sql);
@@ -37,7 +29,6 @@ class MySQLReader
 	
 		return $result->fetch_all(MYSQLI_ASSOC);
 	}
-
 
 	public function getOverview() {
 		
@@ -99,5 +90,4 @@ class MySQLReader
 		
 		return $this->carRow['servicing'];
 	}
-
 }

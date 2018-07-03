@@ -120,6 +120,7 @@
 						<ul>
 							<?php foreach ($category->getSubCategories() as $subcategory): ?>
 							<li class="sub-header"><?php echo $subcategory->getName(); ?></li>
+							
 							<?php foreach ($subcategory->getSpecifications() as $specification): ?>
 							<li><?php echo $specification->getName(); ?> <?php echo $specification->getValue(); ?></li>
 							<?php endforeach; ?>

@@ -1,9 +1,7 @@
 <?php
 
 require_once('models/Specification.php');
-
 /**
- * 
  */
 class Category
 {
@@ -25,7 +23,6 @@ class Category
 	public function getName() {
 		return $this->name;
 	}
-
 
 	public function setSubCategories($subcategories) {
 		$result = [];
