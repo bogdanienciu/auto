@@ -1,9 +1,11 @@
 <?php
-	require_once('vendor/autoload.php');
-	require_once('models/MySQL.php');
+require_once(__DIR__ . '/vendor/autoload.php');
+require_once(__DIR__ . '/secure.php');
 
-	$mysql = new MySQL();
+use App\DB\MySQL;
 
-	$mysql->createCar($_REQUEST);
+$mysql = new MySQL();
 
-	header('Location: auto.php');
+$mysql->createCar($_REQUEST);
+
+header('Location: create.php');

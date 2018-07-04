@@ -1,26 +1,27 @@
 <?php 
-	require 'vendor/autoload.php';
+require_once(__DIR__ . '/vendor/autoload.php');
 
-	require_once('models/MySQLReader.php');
-	require_once('models/Car.php');
+use App\DB\MySQLReader;
+use App\Models\Car;
 
-	$reader = new MySQLReader(1);
+// require_once('models/MySQLReader.php');
+// require_once('models/Car.php');
 
-	$car = new Car($reader->getOverview(), $reader->getDriving(), $reader->getOntheInside(), $reader->getOwning(), $reader->getServicing());
+$reader = new MySQLReader(1);
 
-	$pictures = $reader->getCarPictures();
-	$profilePicture = array_shift($pictures);
+$car = new Car($reader->getOverview(), $reader->getDriving(), $reader->getOntheInside(), $reader->getOwning(), $reader->getServicing());
 
-	$car->setProfilePicture($profilePicture);
-	$car->setCarPictures($pictures);
-	$car->setSpecificationCategories($reader->getSpecificationCategories());
+$pictures = $reader->getCarPictures();
+$profilePicture = array_shift($pictures);
 
-	foreach ($car->getSpecificationCategories() as $category) {
-		$category->setSubCategories($reader->getSubCategories($category->getId()));
+$car->setProfilePicture($profilePicture);
+$car->setCarPictures($pictures);
+$car->setSpecificationCategories($reader->getSpecificationCategories());
 
-		foreach ($category->getSubCategories() as $subcategory) {
-			$subcategory->setSpecifications($reader->getSpecifications($category->getId(), $subcategory->getId()));
-		}
+foreach ($car->getSpecificationCategories() as $category) {
+	$category->setSubCategories($reader->getSubCategories($category->getId()));
+
+	foreach ($category->getSubCategories() as $subcategory) {
+		$subcategory->setSpecifications($reader->getSpecifications($subcategory->getId()));
 	}
-
-	// dump($car->getSpecificationCategories());
+}
