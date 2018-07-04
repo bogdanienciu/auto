@@ -9,7 +9,7 @@ use App\Models\Car;
 
 $reader = new MySQLReader(1);
 
-$car = new Car($reader->getOverview(), $reader->getDriving(), $reader->getOntheInside(), $reader->getOwning(), $reader->getServicing());
+$car = new Car($reader->getFields());
 
 $pictures = $reader->getCarPictures();
 $profilePicture = array_shift($pictures);

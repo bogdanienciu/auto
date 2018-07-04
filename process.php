@@ -2,10 +2,10 @@
 require_once(__DIR__ . '/vendor/autoload.php');
 require_once(__DIR__ . '/secure.php');
 
-use App\DB\MySQL;
+use App\DB\Cars;
 
-$mysql = new MySQL();
+$inventory = new Cars();
 
-$mysql->createCar($_REQUEST);
+$inventory->createCar($_REQUEST);
 
-header('Location: create.php');
+header('Location: cars.php');
