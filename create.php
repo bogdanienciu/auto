@@ -51,7 +51,6 @@ $categories = $inventory->all();
 				</div>
 			</div>
 
-
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">Specification</label>
 
@@ -82,13 +81,16 @@ $categories = $inventory->all();
 													</div>
 												<?php endforeach; ?>
 											</div>
+											
 										</div>
 									<?php endforeach; ?>
 								</div>
+
 							</div>
 						<?php endforeach; ?>
 					</div>
 				</div>
+
 			</div>
 
 			<div class="form-group">
