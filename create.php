@@ -1,4 +1,14 @@
-<?php require_once(__DIR__ . '/secure.php'); ?>
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+require_once(__DIR__ . '/secure.php');
+
+use App\DB\Inventories\Categories;
+
+$inventory = new Categories();
+
+$categories = $inventory->all();
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -42,13 +52,44 @@
 			</div>
 
 
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">Specification</label>
-				<div class="col-sm-10">
-					<textarea name="specification" class="form-control"></textarea>
-				</div>
-			</div> -->
 
+				<div class="col-sm-10">
+					<div class="row">
+						<?php foreach ($categories as $category): ?>
+							<div class="col-sm-6">
+								<h3 class="subtitle"><?php echo $category->getName(); ?></h3>
+
+								<div class="row">
+									<?php foreach ($category->getSubCategories() as $subcategory): ?>
+										<div class="col-sm-12">
+											<?php echo $subcategory->getName(); ?>
+										
+											<div class="row">
+												<?php foreach ($subcategory->getSpecifications() as $specification): ?>
+													<div class="col-sm-12">
+														<div class="form-group">
+															<label for="inputEmail3" class="col-sm-6 control-label"><?php echo $specification->getName(); ?></label>
+															<div class="col-sm-6">
+																<?php if ($specification->getType() == 'string'): ?>
+																	<input type="text" name="specifications[<?php echo $specification->getId(); ?>]"/>
+														 		<?php else: ?>
+																 	<input type="checkbox" name="specifications[<?php echo $specification->getId(); ?>]" value="1"/>
+																<?php endif; ?>
+															</div>
+														</div>
+													</div>
+												<?php endforeach; ?>
+											</div>
+										</div>
+									<?php endforeach; ?>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
 
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">Servicing</label>

@@ -7,7 +7,7 @@ use App\Models\Car;
 // require_once('models/MySQLReader.php');
 // require_once('models/Car.php');
 
-$reader = new MySQLReader(1);
+$reader = new MySQLReader($_REQUEST['id'] ?? 1);
 
 $car = new Car($reader->getFields());
 

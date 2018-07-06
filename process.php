@@ -2,7 +2,8 @@
 require_once(__DIR__ . '/vendor/autoload.php');
 require_once(__DIR__ . '/secure.php');
 
-use App\DB\Cars;
+
+use App\DB\Inventories\Cars;
 
 $inventory = new Cars();
 
