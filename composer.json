@@ -1,7 +1,8 @@
 {
     "require": {
         "symfony/var-dumper": "^4.1",
-        "delight-im/auth": "^8.0"
+        "delight-im/auth": "^8.0",
+        "vlucas/valitron": "^1.4"
     },
     "autoload": {
         "psr-4": {

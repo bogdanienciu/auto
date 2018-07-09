@@ -4,9 +4,19 @@ require_once(__DIR__ . '/secure.php');
 
 
 use App\DB\Inventories\Cars;
+use Valitron\Validator;
 
-$inventory = new Cars();
+$validator = new Validator($_REQUEST);
+$validator->rule('required', ['name', 'overview', 'driving', 'on_the_inside', 'owning', 'servicing']);
 
-$inventory->createCar($_REQUEST);
+if($validator->validate()) {
+    $inventory = new Cars();
 
-header('Location: cars.php');
+	$inventory->createCar($_REQUEST);
+
+	header('Location: cars.php');
+} else {
+    // Errors
+    // dd($validator->errors());
+    header('Location: create.php');
+}
